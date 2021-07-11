@@ -19,11 +19,30 @@ const utils = require('../utils')
 
 test('returns winner', () => {
   const originalGetWinner = utils.getWinner
-  utils.getWinner = jest.fn((p1, p2) => p1)
 
+  // Mock function -> Sigue los argumentos de la función y su comportamiento 
+  utils.getWinner = jest.fn((p1, p2) => p1)
+  let mockFunctionGetWinner = utils.getWinner
+
+
+  // Your code:
   const winner = thumbWar('Kent C. Dodds', 'Ken Wheeler')
   expect(winner).toBe('Kent C. Dodds')
-  // Your code:
+
+  // Mock function object
+  // console.log(mockFunctionGetWinner.mock)
+
+  // This assetion replace all bottom assertions
+  expect(mockFunctionGetWinner.mock.calls).toEqual([
+    ['Kent C. Dodds', 'Ken Wheeler'],
+    ['Kent C. Dodds', 'Ken Wheeler'],
+  ])
+  // expect(mockFunctionGetWinner).toHaveBeenCalledTimes(2)
+  // expect(mockFunctionGetWinner).toHaveBeenCalledWith('Kent C. Dodds', 'Ken Wheeler')
+  // // First time it's called
+  // expect(mockFunctionGetWinner).toHaveBeenNthCalledWith(1, 'Kent C. Dodds', 'Ken Wheeler')
+  // // Second time it's called
+  // expect(mockFunctionGetWinner).toHaveBeenNthCalledWith(2, 'Kent C. Dodds', 'Ken Wheeler')
 
   // cleanup
   utils.getWinner = originalGetWinner

@@ -4,8 +4,8 @@
   "description": "JavaScript Mocking Fundamentals",
   "private": true,
   "main": "index.js",
-  "dependencies": {},
   "devDependencies": {
+    "@types/jest": "^26.0.24",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",

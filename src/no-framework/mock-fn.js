@@ -11,11 +11,33 @@ const thumbWar = require('../thumb-war')
 const utils = require('../utils')
 
 // Your Code:
+function fn(impl){
+
+
+ 
+
+  const mockFn = (...args) => {
+    mockFn.mock.calls.push(args)
+    return impl(...args)
+  }
+
+  mockFn.mock = {
+    calls: []
+  }
+  return mockFn
+}
 
 const originalGetWinner = utils.getWinner
 utils.getWinner = fn((p1, p2) => p1)
+let mockedFunctionGetWinner = utils.getWinner
+
+console.log("Creation of the mock function")
+console.log(mockedFunctionGetWinner)
 
 const winner = thumbWar('Kent C. Dodds', 'Ken Wheeler')
+console.log("\nMock Function after been called")
+console.log(mockedFunctionGetWinner.mock.calls)
+
 assert.strictEqual(winner, 'Kent C. Dodds')
 assert.deepStrictEqual(utils.getWinner.mock.calls, [
   ['Kent C. Dodds', 'Ken Wheeler'],
